@@ -16,10 +16,13 @@
                 <a href="login.php">Iniciar Sesión</a>
             </div>
             <div class="toolbar-section">
-                <a href="#">Promociones</a>
+                <a href="index.php#">Promociones</a>
             </div>
             <div class="toolbar-section">
-                <a href="#">Catálogo</a>
+                <a href="catalogo.php">Catálogo</a>
+            </div>
+            <div class="toolbar-section">
+                <a href="#" id="carrito-enlace">Carrito (<span id="carrito-contador">0</span>)</a>
             </div>
         </div>
     </div>
