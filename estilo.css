@@ -69,6 +69,20 @@ h1 {
     padding: 10px 20px;
     border-radius: 5px;
 }
+#casa {
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 50%;
+}
+
+.toolbar-section img {
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    border-radius: 50%;
+}
 
 /* Efecto de escala al pasar el ratón sobre los botones */
 .toolbar-section:hover {
