@@ -7,26 +7,10 @@
     <link rel="stylesheet" href="estilo.css"> <!-- Enlazar archivo de estilos CSS -->
 </head>
 <body>
-    <div class="toolbar">
-        <div class="toolbar-container">
-            <div class="toolbar-section">
-                <a href="#">Registrarse</a>
-            </div>
-            <div class="toolbar-section">
-                <a href="login.php">Iniciar Sesión</a>
-            </div>
-            <div class="toolbar-section">
-                <a href="index.php#">Promociones</a>
-            </div>
-            <div class="toolbar-section">
-                <a href="catalogo.php">Catálogo</a>
-            </div>
-            <div class="toolbar-section">
-                <a href="#" id="carrito-enlace">Carrito (<span id="carrito-contador">0</span>)</a>
-            </div>
-        </div>
-    </div>
-
+ 
+<?php
+include "toolbar.php"
+?>
     <div class="container">
         <h1>Autos en Venta</h1>
         

@@ -1,23 +1,73 @@
 <?php
-// Verificar si se recibieron datos del formulario
-if (isset($_POST['username']) && isset($_POST['password'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+session_start();
 
-    // Validar las credenciales (ejemplo básico, reemplazar con autenticación real)
-    if ($username === 'usuario' && $password === 'contraseña') {
-        // Inicio de sesión exitoso
-        session_start();
-        $_SESSION['username'] = $username;
-        header('Location: dashboard.php'); // Redireccionar a la página de inicio (dashboard)
-        exit;
+// Validar y limpiar los datos del formulario
+$usuario = isset($_POST['usuario']) ? $_POST['usuario'] : '';
+$contrasena = isset($_POST['contrasena']) ? $_POST['contrasena'] : '';
+
+if (empty($usuario) || empty($contrasena)) {
+    die("Por favor, ingresa tu nombre de usuario y contraseña.");
+}
+
+// Incluir el archivo de conexión a la base de datos
+include('conexion.php');
+
+// Consulta preparada para seleccionar el usuario por su nombre
+$consulta = "SELECT id, usuario, contrasena, tipo_usuario, genero FROM usuarios WHERE usuario = ?";
+$stmt = mysqli_prepare($conectar, $consulta);
+
+if ($stmt === false) {
+    die('Error en la consulta SQL: ' . mysqli_error($conectar));
+}
+
+// Enlazar el parámetro (nombre de usuario) a la consulta preparada
+mysqli_stmt_bind_param($stmt, "s", $usuario);
+
+// Ejecutar la consulta preparada
+mysqli_stmt_execute($stmt);
+
+// Obtener el resultado de la consulta
+$resultado = mysqli_stmt_get_result($stmt);
+
+if ($resultado && mysqli_num_rows($resultado) > 0) {
+    $fila = mysqli_fetch_assoc($resultado);
+
+    // Verificar si la contraseña en texto plano es correcta
+    if ($contrasena === $fila['contrasena']) {
+        // La contraseña es correcta
+        $_SESSION['usuario'] = $fila['usuario'];
+        $_SESSION['tipo_usuario'] = $fila['tipo_usuario'];
+
+        // Almacenar el género en la sesión
+        $_SESSION['genero'] = $fila['genero'];
+
+        // Redireccionar según el tipo de usuario
+        switch ($fila['tipo_usuario']) {
+            case 1:
+                header("Location: vista_SuperAdmin.php");
+                exit();
+            case 2:
+                header("Location: vista_Admin.php");
+                exit();
+            case 3:
+                header("Location: vista_Usuario.php");
+                exit();
+            default:
+                echo "Tipo de usuario desconocido.";
+                break;
+        }
     } else {
-        // Credenciales incorrectas, mostrar mensaje de error
-        $error_message = "Usuario o contraseña incorrectos. Por favor, intenta de nuevo.";
+        // La contraseña es incorrecta
+        echo "Contraseña incorrecta. Intenta de nuevo.";
+        exit();
     }
 } else {
-    // Redireccionar si se intenta acceder directamente a este archivo sin datos del formulario
-    header('Location: login.php');
-    exit;
+    // El usuario no existe
+    echo "Usuario no encontrado.";
+    exit();
 }
+
+// Cerrar la consulta preparada y la conexión
+mysqli_stmt_close($stmt);
+mysqli_close($conectar);
 ?>

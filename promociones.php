@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>obed deja de chingar</h1>
+
 </body>
 </html>
