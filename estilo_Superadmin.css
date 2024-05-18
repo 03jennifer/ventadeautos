@@ -1,0 +1,104 @@
+/* Estilos del Toolbar */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container { 
+    max-width: 100%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.welcome-message {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.logout-link {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.logout-link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* Añadir estilo para el div "bienvenida" */
+.bienvenida {
+    background-color: #e7f3fe;
+    color: #2c3e50;
+    border: 1px solid #3498db;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.bienvenida p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.toolbar {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.toolbar-container {
+    margin: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.toolbar-section {
+    font-size: 16px;
+    transition: transform 0.3s ease; /* Agregar transición para transformación */
+}
+
+.toolbar-section a {
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    padding: 10px 10px;
+    border-radius: 5px;
+}
+#casa {
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 50%;
+}
+
+.toolbar-section img {
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+/* Efecto de escala al pasar el ratón sobre los botones */
+.toolbar-section:hover {
+    transform: scale(1.1); /* Aumentar tamaño al pasar el ratón */
+}
+
+/* Animación al hacer hover sobre los enlaces */
+.toolbar-section a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Cambiar color de fondo al pasar el ratón */
+    transform: translateY(-3px); /* Desplazar hacia arriba */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Agregar transición */
+}
+
