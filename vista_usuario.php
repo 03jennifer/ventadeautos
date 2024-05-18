@@ -1,14 +1,23 @@
 <?php
 session_start();
 
-// Verificar si el usuario ha iniciado sesión
-if (!isset($_SESSION['username'])) {
-    header('Location: login.php');
-    exit;
-}
+if (isset($_SESSION['usuario'])) {
+    // Obtener el género del usuario
+    $genero = $_SESSION['genero'];
 
-// Obtener el nombre de usuario desde la sesión
-$username = $_SESSION['username'];
+    // Mostrar un mensaje de bienvenida personalizado
+    if ($genero == 'Hombre') {
+        echo "<p>Bienvenido, caballero. Disfruta de tu experiencia en nuestro sitio.</p>";
+    } elseif ($genero == 'Mujer') {
+        echo "<p>Bienvenida, dama. Esperamos que te sientas cómoda en nuestro sitio.</p>";
+    } else {
+        echo "<p>Bienvenido/a. Disfruta de tu experiencia...</p>";
+    }
+} else {
+    // Si el usuario no ha iniciado sesión, redirigirlo al formulario de inicio de sesión
+    header("Location: login.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,10 +25,12 @@ $username = $_SESSION['username'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="estilo_vistas.css">
+    <title>Bienvenido, <?php echo $_SESSION['usuario']; ?> Usuario</title>
 </head>
 <body>
-    <h1>Bienvenido, <?php echo htmlspecialchars($username); ?>!</h1>
+    <h1><?php echo $_SESSION['usuario']; ?></h1>
     <p>Esta es tu página de inicio después de iniciar sesión.</p>
     <p><a href="cerrar_sesion.php">Cerrar Sesión</a></p>
 </body>
